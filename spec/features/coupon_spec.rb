@@ -12,7 +12,7 @@ describe 'Multiple coupons are shown' do
     Coupon.create(coupon_code: "ASD123", store: "Chipotle")
     Coupon.create(coupon_code: "XYZ098", store: "Jamba")
     visit coupons_path
-    expect(page).to have_content(/Chipotle|Jamba/)
+    expect(page).to have_content("XYZ098")
   end
 end
 
@@ -25,8 +25,8 @@ describe 'form page' do
   it 'new form submits content and renders form content' do
     visit new_coupon_path
 
-    fill_in 'coupon[coupon_code]', with: "YAYFREE"
-    fill_in 'coupon[store]', with: "Hobby Lobby"
+    fill_in :coupon_code, with: "YAYFREE"
+    fill_in :store, with: "Hobby Lobby"
 
     click_on "Submit Coupon"
 
@@ -36,8 +36,8 @@ describe 'form page' do
   it 'creates a record in the database' do
     visit new_coupon_path
 
-    fill_in 'coupon[coupon_code]', with: "FREEITEM"
-    fill_in 'coupon[store]', with: "Quip"
+    fill_in :coupon_code, with: "FREEITEM"
+    fill_in :store, with: "Quip"
 
     click_on "Submit Coupon"
 
